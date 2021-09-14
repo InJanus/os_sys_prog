@@ -8,7 +8,7 @@
 # system would want to build anyway when it descends its source tree during a full
 # kernel build
 
-obj-m += your_module_name.o
+obj-m += test.o
 
 # all is the default action or the action that is taken if a user
 # types “build all”.  In this case, it runs the make utility to
@@ -21,7 +21,7 @@ obj-m += your_module_name.o
 # is actually running at the moment...
 
 all:
-   make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 # clean is the option for “cleaning up” all the complied files in
 # the current build and leave just the sources.  This works
@@ -29,4 +29,4 @@ all:
 # builds.
 
 clean:
-  make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
