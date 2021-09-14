@@ -35,28 +35,28 @@ MODULE_LICENSE("GPL");
 // The forms of these functions and what parameters are expected are defined by
 // kernel conventions.  We'll come back to this in more detail in a later lab.
 
-static int device_open(struct inode *, struct file *);
-static int device_release(struct inode *, struct file *);
-static ssize_t device_read(struct file *, char *, size_t, loff_t *);
-static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
-static int major_num;
+// static int device_open(struct inode *, struct file *);
+// static int device_release(struct inode *, struct file *);
+// static ssize_t device_read(struct file *, char *, size_t, loff_t *);
+// static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
+// static int major_num;
 
-// Now let's move on to variable and struct declarations
+// // Now let's move on to variable and struct declarations
 
-static int device_open_count = 0;           // We will use this to keep track of devices
-                                            // opened by this driver.  Really, this
-                                            // module will only ever open one device,
-                                            // but SOME drivers might open more than one
-                                            // The point of keeping the count is so that
-                                            // the driver knows when it should ignore
-                                            // requests to "open more devices"
+// static int device_open_count = 0;           // We will use this to keep track of devices
+//                                             // opened by this driver.  Really, this
+//                                             // module will only ever open one device,
+//                                             // but SOME drivers might open more than one
+//                                             // The point of keeping the count is so that
+//                                             // the driver knows when it should ignore
+//                                             // requests to "open more devices"
 
-static char msg_buffer[MSG_BUFFER_LEN];     // We will use this to hold a message we want
-                                            // this module to pass out whenever the
-                                            // device it creates is read
+// static char msg_buffer[MSG_BUFFER_LEN];     // We will use this to hold a message we want
+//                                             // this module to pass out whenever the
+//                                             // device it creates is read
 
-static char *msg_ptr;                       // This is a pointer that we will set to
-                                            // point to memory where the message is
+// static char *msg_ptr;                       // This is a pointer that we will set to
+//                                             // point to memory where the message is
                                             // located.
 
 // Let's start with function prototypes.  The next four prototype definitions are

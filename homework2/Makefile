@@ -8,7 +8,7 @@
 # system would want to build anyway when it descends its source tree during a full
 # kernel build
 
-obj-m += your_module_name.o
+obj-m += test.o
 
 # all is the default action or the action that is taken if a user
 # types “build all”.  In this case, it runs the make utility to
