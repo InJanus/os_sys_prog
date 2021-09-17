@@ -58,7 +58,7 @@ MODULE_LICENSE("GPL");
 // static char *msg_ptr;                       // This is a pointer that we will set to
 //                                             // point to memory where the message is
                                             // located.
-static int count = 0;
+static int count = 0; //init count
 
 // Let's start with function prototypes.  The next four prototype definitions are
 // forward references to "handlers" that we'll associate with kernel attempts to
@@ -118,7 +118,7 @@ static struct file_operations file_ops =
 static ssize_t device_read(struct file *flip, char *buffer, size_t len, loff_t *offset)
   { int bytes_read = 0;
      // If we’re at the end of the local copy, loop back to the beginning
-        if (*msg_ptr == 0 && count < 10) msg_ptr = msg_buffer;
+        if (*msg_ptr == 0 &&(count < 10)){ msg_ptr = msg_buffer;} //will not output mesage if count is 10 or bigger
 
      // Send the data to the user via the device.  There's a little weirdness here.
      // The message is held in kernel memory, but the process that is accessing the
@@ -135,7 +135,7 @@ static ssize_t device_read(struct file *flip, char *buffer, size_t len, loff_t *
              len--;
              bytes_read++;
            }
-        count++;
+        count++;//increment count 
       return bytes_read;
    }
 
@@ -170,7 +170,7 @@ static int device_open(struct inode *inode, struct file *file)
 
 static int device_release(struct inode *inode, struct file *file)
   { device_open_count--;
-    count = 0;
+    count = 0; //resets count to 0 so it can print 10 more once read again
     module_put(THIS_MODULE);
     return 0;
   }
