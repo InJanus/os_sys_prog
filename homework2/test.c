@@ -135,10 +135,8 @@ static ssize_t device_read(struct file *flip, char *buffer, size_t len, loff_t *
              len--;
              bytes_read++;
            }
-        count = count + 1;
+        count++;
       return bytes_read;
-    
-
    }
 
 // The read handler device_write() does VERY little for this module.  We are making a
