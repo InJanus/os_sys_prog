@@ -135,8 +135,9 @@ static ssize_t device_read(struct file *flip, char *buffer, size_t len, loff_t *
              len--;
              bytes_read++;
            }
-        return bytes_read;
-    count = count + 1;
+        count = count + 1;
+      return bytes_read;
+    
 
    }
 
