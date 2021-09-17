@@ -21,7 +21,7 @@ obj-m += test.o
 # is actually running at the moment...
 
 all:
-   make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 # clean is the option for “cleaning up” all the complied files in
 # the current build and leave just the sources.  This works
@@ -29,4 +29,4 @@ all:
 # builds.
 
 clean:
-  make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
