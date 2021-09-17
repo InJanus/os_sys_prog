@@ -19,7 +19,7 @@
 // so our modifying it and giving full credit to the original author is totally
 // cool.
 
-MODULE_AUTHOR("Original Author: Robert W. Oliver II - modified by jcg");
+MODULE_AUTHOR("Original Author: Robert W. Oliver II - modified by jcg, modified by bnc");
 MODULE_DESCRIPTION("A simple example character driver that does only one thing");
 MODULE_VERSION("0.02");
 MODULE_LICENSE("GPL");
@@ -58,6 +58,7 @@ MODULE_LICENSE("GPL");
 // static char *msg_ptr;                       // This is a pointer that we will set to
 //                                             // point to memory where the message is
                                             // located.
+static int count = 0;
 
 // Let's start with function prototypes.  The next four prototype definitions are
 // forward references to "handlers" that we'll associate with kernel attempts to
@@ -117,7 +118,7 @@ static struct file_operations file_ops =
 static ssize_t device_read(struct file *flip, char *buffer, size_t len, loff_t *offset)
   { int bytes_read = 0;
      // If we’re at the end of the local copy, loop back to the beginning
-        if (*msg_ptr == 0) msg_ptr = msg_buffer;
+        if (*msg_ptr == 0 && count < 10) msg_ptr = msg_buffer;
 
      // Send the data to the user via the device.  There's a little weirdness here.
      // The message is held in kernel memory, but the process that is accessing the
@@ -135,6 +136,8 @@ static ssize_t device_read(struct file *flip, char *buffer, size_t len, loff_t *
              bytes_read++;
            }
         return bytes_read;
+    count = count + 1;
+
    }
 
 // The read handler device_write() does VERY little for this module.  We are making a
@@ -168,6 +171,7 @@ static int device_open(struct inode *inode, struct file *file)
 
 static int device_release(struct inode *inode, struct file *file)
   { device_open_count--;
+    count = 0;
     module_put(THIS_MODULE);
     return 0;
   }
