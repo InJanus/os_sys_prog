@@ -11,6 +11,7 @@ int main(int argc, char **argv){
     mode = "w";
     filename = "";
     while(*(argv+argcount)){ //append argument
+        printf("%s\n", *(argv+argcount));
         if(strcmp(*(argv+argcount),"-a") == 0 || strcmp(*(argv+argcount),"--append") == 0){
             mode = "a";
         }else if(strcmp(*(argv+argcount),"--version") == 0){ //--version argument
@@ -29,6 +30,12 @@ int main(int argc, char **argv){
                     count++; 
                 }
                 fclose(myfile); //close file
+            }else{
+                //no filename provided
+                while(fgets(myinput, 100, stdin)){ //input pipe command; this is useful to see if the user used the pipe(|) command
+                                                   //stdin is the pipe used from the console
+                    printf("%s", myinput); //write to console
+                }
             }
         }
         argcount++;

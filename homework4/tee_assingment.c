@@ -48,6 +48,29 @@ int main(int argc, char **argv){
                     wait(pid, &status, 0); //wait for child
                 }
                 fclose(myfile); //close file
+            }else{
+                pid_t  pid;
+                int p[2]; //needed for pipe
+                if (pipe(p) < 0) exit(1); //set up pipe
+                if ((pid = fork()) < 0) { //fork into two processes
+                    printf("forking child process failed\n");
+                    return 0;
+                }
+                if(pid == 0){
+                    //child
+                    close(p[1]); //read only
+                    while (read(p[0], inbuf, MSGSIZE)){ //read from pipe
+                        printf("%s", inbuf); //write to console
+                    }
+                }else{
+                    //parent
+                    close(p[0]); //write only
+                    while(fgets(myinput, 100, stdin)){
+                        write(p[1], myinput, MSGSIZE); //send buffer through pipe
+                    }
+                    close(p[1]); //close pipe
+                    wait(pid, &status, 0); //wait for child
+                }
             }
         }
         argcount++;
