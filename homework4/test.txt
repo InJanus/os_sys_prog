@@ -1,0 +1,8 @@
+a.out
+cat_rewrite.c
+example1.c
+example2.c
+tee_2
+tee_assingment.c
+tee_rewrite.c
+test.txt
