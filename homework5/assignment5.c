@@ -9,19 +9,25 @@ int* merge(){
     exit(0);
 }
 
-int* mergeSort(int* myleftlist, int* myrightlist){
-    // merge two lists together into one but sorted
-    if(myleftlist == myrightlist){ //not down to 1 value yet
-        // int m_index = l_index+(r_index-l_index)/2; //find the middle index
+int* runMergeSort(int* myleftlist, int* myrightlist, int leftlen, int rightlen){
 
-        //going to try to do a little diffrent than stock
-        //split the array into left and right lists that way there are no data overwriting whthin threads
+}
 
-        // mergeSort(mylist, l_index, m_index);
-        // mergeSort(mylist, m_index+1, r_index);
-
-        return merge();
+int* mergeSort(int *mylist, int length){
+    int* leftlist = (int*)malloc((length/2)*sizeof(int));
+    int* rightlist = (int*)malloc((length/2)*sizeof(int));
+    int leftlen = length/2, rightlen = length/2;
+    for(int i = 0; i < length/2; i++){
+        printf("%i : %i\n", i, *(list+i));
+        leftlist[i] = *(list+i);
     }
+    for(int i = length/2; i < length; i++){
+        printf("%i : %i\n", i, *(list+i));
+        rightlist[i] = *(list+i);
+    }
+    printf("%i,%i", leftlen, rightlen);
+    
+    runMergeSort(leftlist, rightlist, leftlen, rightlen);
 }
 
 int main(){
@@ -47,15 +53,7 @@ int main(){
     // }
 
     // split the array in half and call the first few threads
-    int* leftlist, rightlist = (int*)malloc((length/2)*sizeof(int));
-    for(int i = 0; i < length/2; i++){
-        printf("%i : %i\n", i, *(list+i));
-        leftlist[i] = *()
-    }
-    for(int i = length/2; i < length; i++){
-        printf("%i : %i\n", i, *(list+i));
-    }
 
-
+    mergeSort(list, length);
     return 0;
 }
