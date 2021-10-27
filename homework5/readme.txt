@@ -1,0 +1,1 @@
+make sure to add the -pthread flag in gcc for pthread.h to work
