@@ -15,6 +15,7 @@ def main(length):
 
     for i in range(int(length)):
         f.write(str(random.randint(lower_limit, upper_limit)))
+        # f.write(str(i))
         f.write("\n")
     f.close()
 
